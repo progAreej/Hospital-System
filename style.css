@@ -79,13 +79,80 @@ select{
     overflow-x: scroll;
     scrollbar-color:#7774a8 white;
 }
-footer{
-    height: 200px;
-    background-color: #7774a8;
-}
+
 nav{
     top: 0;
     position: sticky;
     height: 100px;
     background-color: #7774a8;
+    padding:0px 70px  ;
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    text-align: center;
+    margin-top: 40px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: inherit;
+    padding: 10px 20px;
+}
+
+nav ul li {
+    margin: 0 5px; 
+}
+
+nav ul li a:hover {
+    background-color: #ddd; 
+    color: #000; 
+}
+
+nav ul li a {
+    color: white; 
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-weight:700;
+    
+    
+}
+footer {
+    height: 100px;
+    background-color: #7774a8;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; 
+    margin-bottom: 20px; 
+}
+
+footer ul li {
+    margin: 0 10px;
+}
+
+footer ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+footer ul li a:hover {
+    text-decoration: underline;
+}
+
+footer p {
+    margin: 0;
 }
