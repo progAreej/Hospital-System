@@ -1,5 +1,3 @@
-document.getElementById("form").addEventListener("submit", render);
-
 function DisplayPatients(fullName, password, birthday, gender, diseases, phone) {
     this.fullName = fullName;
     this.password = password;
@@ -12,15 +10,70 @@ function DisplayPatients(fullName, password, birthday, gender, diseases, phone) 
 function render(event) {
     event.preventDefault();
 
-    let fullName = document.getElementById("fullName").value;
+    let fullName = document.getElementById("fullName").value.trim();
     let password = document.getElementById("password").value;
     let birthday = document.getElementById("birthday").value;
     let gender = document.getElementById("gender").value;
     let diseases = document.getElementById("diseases").value;
     let phone = document.getElementById("phone").value;
 
+    // Full Name validation
+    let fullNameInput = document.getElementById("fullName");
+    let fullNameRe = /\s/;
+    let fullNameHasSpace = fullNameRe.test(fullName);
+    let fullNameWarning = document.querySelector("#fullName + p");
+
+    if (fullNameWarning) {
+        fullNameWarning.remove();
+    }
+
+    if (fullNameHasSpace) {
+        let par = document.createElement("p");
+        par.innerHTML = "Full name should not contain white spaces ✘";
+        par.style.color = "red";
+        fullNameInput.insertAdjacentElement("afterend", par);
+        return;
+    }
+
+    // Password validation
+    let passwordInput = document.getElementById("password");
+    let passwordRe = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+    let passwordIsValid = passwordRe.test(password);
+    let passwordWarning = document.querySelector("#password + p");
+
+    if (passwordWarning) {
+        passwordWarning.remove();
+    }
+
+    if (!passwordIsValid) {
+        let par = document.createElement("p");
+        par.innerHTML = "Password must contain at least 8 characters, including uppercase, number, and special character ✘";
+        par.style.color = "red";
+        passwordInput.insertAdjacentElement("afterend", par);
+        return;
+    }
+
+    // Phone validation
+    let phoneInput = document.getElementById("phone");
+    let phoneRe = /^07\d{8}$/;
+    let phoneIsValid = phoneRe.test(phone);
+    let phoneWarning = document.querySelector("#phone + p");
+
+    if (phoneWarning) {
+        phoneWarning.remove();
+    }
+
+    if (!phoneIsValid) {
+        let par = document.createElement("p");
+        par.innerHTML = "Phone number must start with 07 and be 10 digits long ✘";
+        par.style.color = "red";
+        phoneInput.insertAdjacentElement("afterend", par);
+        return;
+    }
+
+    // Save patient data to localStorage
     let num = localStorage.length + 1;
-    let patientKey = "Patient ("+ num+")";
+    let patientKey = "Patient (" + num + ")";
     let patientData = new DisplayPatients(fullName, password, birthday, gender, diseases, phone);
     localStorage.setItem(patientKey, JSON.stringify(patientData));
     let retrievedPatientData = JSON.parse(localStorage.getItem(patientKey));
@@ -35,6 +88,7 @@ function render(event) {
 
     console.log(patient);
 
+    // Display patient data
     let output = document.getElementById("output");
     let card = document.createElement("div");
     output.appendChild(card);
@@ -56,5 +110,8 @@ function render(event) {
         "Diseases: " + patient.diseases + "<br>" +
         "Phone: " + patient.phone + "<br>";
 
+    // Reset the form after successful validation and submission
     event.target.reset();
 }
+
+document.getElementById("form").addEventListener("submit", render);

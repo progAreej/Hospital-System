@@ -18,7 +18,7 @@ form{
     margin-top: 50px;
     background-color:#BCBBD9 ;
     width: 320px;
-    height: 600px;
+    height: 80%;
     padding: 40px;
 
 
@@ -154,5 +154,8 @@ footer ul li a:hover {
 }
 
 footer p {
+    margin: 0;
+}
+#rePass{
     margin: 0;
 }
